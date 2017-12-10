@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.placeholder {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.body {
+  width: 100vw;
+  height: 100vw;
+  background-color: black;
+}
+
+.wrapper {
+  
+}
