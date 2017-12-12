@@ -14,7 +14,11 @@ export default class App extends Component {
         this.state = {
             pages: [],
             posts: [],
-            settings: {},
+            settings: {
+                title: '',
+                description: '',
+                header_image: '',
+            },
         }
     }
 
@@ -90,7 +94,7 @@ export default class App extends Component {
                 <Router>
                     <div className="body">
                         <div className="wrapper">
-                            <Navbar />
+                            <Navbar settings={this.state.settings} />
                             <Switch>
                                 <PropsRoute path='/home' component={Home} {...this.state} />
                                 <PropsRoute path='/' component={Home} {...this.state} />

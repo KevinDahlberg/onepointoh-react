@@ -18,5 +18,35 @@ body {
 }
 
 .wrapper {
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 8fr 1fr 1fr;
+  grid-template-rows:50px 350px 50px;
+  grid-template-areas:
+    ". h h h ."
+    ". . c . ."
+    "f f f f f";
 }
+
+.navbar {
+  grid-area: h;
+}
+
+.content {
+  grid-area: c;
+}
+
+.content h2 {
+  margin-top: 50px;
+  border-bottom: 1px solid white;
+  height: 36px;
+  font-size: 36px;
+}
+
+.content p {
+  margin-left: 20px;
+}
+
+.footer {
+  grid-area: f;
+}
+
