@@ -1,12 +1,13 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = (props) => (
     <div className = "navbar">
         <div className = "navbar-content-left">
-            <span>{props.settings.title}</span>
+            <NavLink to="/">{props.settings.title}</NavLink>
         </div>
         <div className = "navbar-content-right">
-            <span>About</span>
+            <NavLink to="/about">About</NavLink>
         </div>
     </div>
 )
