@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+
+//functions from redux
+import {
+    fetchPagesIfNeeded,
+    fetchSettingsIfNeeded,
+} from './data/site'
 
 //components
 import Navbar from './components/Navbar'
@@ -7,102 +15,40 @@ import Navbar from './components/Navbar'
 //views
 import Home from './views/Home'
 
-export default class App extends Component {
-    constructor(props) {
-        super(props)
+class App extends Component {
 
-        this.state = {
-            pages: [],
-            posts: [],
-            settings: {
-                title: '',
-                description: '',
-                header_image: '',
-            },
-        }
-    }
-
-    /** DB Methods */
-    /**
-     * @function fetchSettings
-     * @return object of page settings
-     * @since 1.0
-     */
-    fetchSettings() {
-        const init ={
-            method: 'GET'
-        }
-        fetch('http://wordpress.onepointoh.solutions/wp-json/wp-rest-routes/v2/settings/all', init)
-            .then((response) => {
-                return response.json()
-            })
-            .then((settings) => {
-                this.setState({settings: settings})
-                console.log(this.state)
-            })
-    }
-
-    /**
-     * @function fetchPages
-     * @return array of pages
-     * @since 1.0
-     */
-    fetchPages() {
-        const init = {
-            method: 'GET'
-        }
-        fetch('http://wordpress.onepointoh.solutions/wp-json/wp/v2/pages', init)
-        .then((response) => {
-            return response.json()
-        })
-        .then((pages) => {
-            this.setState({pages: pages})
-            console.log(this.state)
-        })
-    }
-
-
-    //gets website parts asap
     componentWillMount() {
-        this.fetchSettings()
-        this.fetchPages()
+        const { fetchPagesIfNeeded, fetchSettingsIfNeeded } = this.props;
+        fetchSettingsIfNeeded();
+        fetchPagesIfNeeded();
     }
 
     render() {
-        //enables state to be passed down as props in routes for react router v4
-        const renderMergedProps = (component, ...rest) => {
-            const finalProps = Object.assign({}, ...rest);
-            return (
-            React.createElement(component, finalProps)
-            );
-        }
-        //enables state to be passed down as props in routes for react router v4
-        const PropsRoute = ({ component, ...rest }) => {
-            return (
-            <Route {...rest} render={routeProps => {
-                return renderMergedProps(component, routeProps, rest);
-            }}/>
-            );
-        }
-
-        if (this.state.pages.length === 0){
-            return (
-                <div className="placeholder" />
-            )
-        } else {
-            return (
-                <Router>
-                    <div className="body">
-                        <div className="wrapper">
-                            <Navbar settings={this.state.settings} />
-                            <Switch>
-                                <PropsRoute path='/home' component={Home} {...this.state} />
-                                <PropsRoute path='/' component={Home} {...this.state} />
-                            </Switch>
-                        </div>
-                    </div>
-                </Router>
-            )
-        }
+        const { settings } = this.props
+        return (
+            <div className="body">
+                <div className="wrapper">
+                    <Navbar settings={settings} />
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route exact path='/home' component={Home} />
+                    </Switch>
+                </div>
+            </div>
+        )
     }
 }
+
+const mapStateToProps = state => ({
+    isFetching: state.siteReducer.isFetching,
+    settings: state.siteReducer.settings,
+});
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        { fetchPagesIfNeeded, fetchSettingsIfNeeded }, 
+        dispatch
+    );
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
