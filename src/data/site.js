@@ -17,9 +17,9 @@ const initialState = {
     header_image: '',
   },
   media: [],
-  isFetchingSettings: false,
-  isFetchingPages: false,
-  isFetchingMedia: false,
+  isFetchingSettings: true,
+  isFetchingPages: true,
+  isFetchingMedia: true,
 }
 
 /**
@@ -27,15 +27,15 @@ const initialState = {
  */
 
 function requestSettings() {
-  return {type: REQUEST_SETTINGS, isFetching: true}
+  return {type: REQUEST_SETTINGS, isFetchingSettings: true}
 }
 
 function receiveSettings(json) {
-  return {type: RECEIVE_SETTINGS, settings: json, isFetching: false}
+  return {type: RECEIVE_SETTINGS, settings: json, isFetchingSettings: false}
 }
 
 function requestPages() {
-  return {type: REQUEST_PAGES, isFetching: true}
+  return {type: REQUEST_PAGES, isFetching: true }
 }
 
 function receivePages(json) {

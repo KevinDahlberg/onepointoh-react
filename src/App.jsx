@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
@@ -10,7 +10,8 @@ import {
 } from './data/site'
 
 //components
-import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
+import Main from './components/Main'
 
 //views
 import Home from './views/Home'
@@ -24,16 +25,11 @@ class App extends Component {
     }
 
     render() {
-        const { settings } = this.props
+        const { isFetching, settings, pages } = this.props
         return (
-            <div className="body">
-                <div className="wrapper">
-                    <Navbar settings={settings} />
-                    <Switch>
-                        <Route exact path='/' component={Home} />
-                        <Route exact path='/home' component={Home} />
-                    </Switch>
-                </div>
+            <div className="wrapper">
+                <Sidebar title={settings.title} />
+                <Main page='about' fetching={isFetching} />
             </div>
         )
     }
@@ -42,6 +38,7 @@ class App extends Component {
 const mapStateToProps = state => ({
     isFetching: state.siteReducer.isFetching,
     settings: state.siteReducer.settings,
+    pages: state.siteReducer.pages,
 });
 
 const mapDispatchToProps = dispatch => {
