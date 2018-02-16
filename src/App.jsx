@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
@@ -14,7 +14,8 @@ import Sidebar from './components/Sidebar'
 import Main from './components/Main'
 
 //views
-import Home from './views/Home'
+const About = (props) => (<Main page={'about'} />)
+const Work = (props) => (<Main page={'our-process'} />)
 
 class App extends Component {
 
@@ -25,11 +26,16 @@ class App extends Component {
     }
 
     render() {
-        const { isFetching, settings, pages } = this.props
+        const { settings } = this.props
         return (
             <div className="wrapper">
                 <Sidebar title={settings.title} />
-                <Main page='about' fetching={isFetching} />
+                <Switch>
+                    <Route path='/about' component={About} />
+                    <Route path='/work' component={Work} />
+                    <Route path='/contact' component={About} />
+                    <Route exact path='/' component={About} />
+                </Switch>
             </div>
         )
     }

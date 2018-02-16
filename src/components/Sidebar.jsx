@@ -12,12 +12,12 @@ export default class Sidebar extends Component {
         return(
             <div className="sidebar">
                 <div className="sidebar-title">
-                    <h1>{title}</h1>
+                    <h2>One.Point.Oh</h2>
                 </div>
                 <div className="sidebar-content">
-                    <NavLink to="/about">.about</NavLink>
-                    <NavLink to="/work">.work</NavLink>
-                    <NavLink to="/contact">.contact</NavLink>
+                    <NavLink className="sidebar-link" to="/about">.about</NavLink>
+                    <NavLink className="sidebar-link" to="/work">.work</NavLink>
+                    <NavLink className="sidebar-link" to="/contact">.contact</NavLink>
                 </div>
                 <div className="sidebar-footer">
                     <div className="sidebar-icons">

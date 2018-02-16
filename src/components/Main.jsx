@@ -3,6 +3,10 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import FaFacebook from 'react-icons/lib/fa/facebook';
+import FaInstagram from 'react-icons/lib/fa/instagram';
+import FaTwitter from 'react-icons/lib/fa/twitter';
+
 import Content from './Content';
 
 class Main extends Component {
@@ -19,6 +23,15 @@ class Main extends Component {
                         }
                     </div>
                 </div>
+                <div className="mobile-footer">
+                        <div className="sidebar-icons">
+                            <ul>
+                                <ol><FaFacebook /></ol>
+                                <ol><FaInstagram /></ol>
+                                <ol><FaTwitter /></ol>
+                            </ul>
+                        </div>
+                </div>
             </div>
         )
     }
@@ -31,7 +44,6 @@ const mapStateToProps = state => ({
 
 Main.propTypes = {
     page: PropTypes.string,
-    fetching: PropTypes.bool,
 }
 
 export default connect(mapStateToProps, null)(Main);
