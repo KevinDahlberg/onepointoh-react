@@ -19,3 +19,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# credentials, don't ever upload this stuff
+/src/credentials.js
+

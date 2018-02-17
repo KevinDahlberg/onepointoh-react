@@ -8,6 +8,7 @@ import store, { history } from './data/store';
 import App from './App';
 
 import '../node_modules/normalize.css/normalize.css'
+import 'material-components-web/dist/material-components-web.min.css';
 import './index.css';
 
 ReactDOM.render(

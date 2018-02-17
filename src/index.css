@@ -108,6 +108,40 @@ p {
   display: none;
 }
 
+.mdc-card__title, .mdc-text-field__input, .mdc-text-field__label {
+  color: white;
+}
+
+.mdc-text-field--textarea {
+  border: 1px solid black;
+}
+
+.mdc-text-field--textarea.mdc-text-field--focused {
+  border-color: white;
+}
+
+.mdc-text-field--textarea .mdc-text-field__input:focus {
+  border-color: white;
+}
+
+.mdc-text-field__label {
+  background-color: rgba(100,100,100,0) !important;
+}
+
+.mdc-text-field__bottom-line {
+  background-color: black;
+}
+
+
+
+.mdc-text-field {
+  color: white;
+}
+
+.contact-form {
+  color: white !important;
+}
+
 @media (max-width: 899px) {
   .wrapper {
     flex-direction: column;

@@ -10,8 +10,9 @@ import {
 } from './data/site'
 
 //components
-import Sidebar from './components/Sidebar'
-import Main from './components/Main'
+import Sidebar from './components/Sidebar';
+import Main from './components/Main';
+import Contact from './components/Contact';
 
 //views
 const About = (props) => (<Main page={'about'} />)
@@ -33,7 +34,7 @@ class App extends Component {
                 <Switch>
                     <Route path='/about' component={About} />
                     <Route path='/work' component={Work} />
-                    <Route path='/contact' component={About} />
+                    <Route path='/contact' component={Contact} />
                     <Route exact path='/' component={About} />
                 </Switch>
             </div>
