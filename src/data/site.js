@@ -147,7 +147,6 @@ function fetchMedia() {
  */
 
 function siteReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case REQUEST_SETTINGS:
     return {
